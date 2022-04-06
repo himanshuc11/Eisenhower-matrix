@@ -20,8 +20,8 @@ function DroppableContainer({ column }) {
               </Heading>
             </Tooltip>
 
-            {column.taskIds.map((taskId) => (
-              <Task taskId={taskId} key={taskId} />
+            {column.taskIds.map((taskId, index) => (
+              <Task taskId={taskId} key={taskId} index={index} />
             ))}
             {provided.placeholder}
           </Box>

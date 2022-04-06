@@ -3,12 +3,10 @@ import { Box } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 
-function Task({ taskId }) {
+function Task({ taskId, index }) {
   const taskData = useSelector((state) => state.grid.tasks[taskId]);
-  const copy = taskData.id;
-  const idx = copy.replace(/[^0-9]/g, "");
   return (
-    <Draggable draggableId={taskData.id} index={1}>
+    <Draggable draggableId={taskData.id} index={index}>
       {(provided, snapshot) => {
         return (
           <Box

@@ -2,12 +2,23 @@ const MOVE_WITHIN_COLUMN = "move_within_column";
 const MOVE_ACROSS_COLUMN = "move_across_column";
 const DELETE_TASK = "delete_task";
 
-export const moveWithinColumn = () => {
-  return { type: MOVE_WITHIN_COLUMN };
+export const moveWithinColumn = (columnId, newTaskId) => {
+  return { type: MOVE_WITHIN_COLUMN, columnId: columnId, newTaskId: newTaskId };
 };
 
-export const moveAcrossColumn = () => {
-  return { type: MOVE_ACROSS_COLUMN };
+export const moveAcrossColumn = (
+  sourceColumnId,
+  sourceColumTask,
+  destinationColumnId,
+  destinationColumnTask
+) => {
+  return {
+    type: MOVE_ACROSS_COLUMN,
+    sourceColumnId,
+    sourceColumTask,
+    destinationColumnId,
+    destinationColumnTask,
+  };
 };
 
 export const deleteTask = () => {
@@ -27,6 +38,9 @@ const initialState = {
 
     "task-7": { id: "task-7", content: "Eliminate 1" },
     "task-8": { id: "task-8", content: "Eliminate 2" },
+    "task-9": { id: "task-9", content: "Eliminate 3" },
+    "task-10": { id: "task-10", content: "Eliminate 4" },
+    "task-11": { id: "task-11", content: "Eliminate 5" },
   },
 
   columns: {
@@ -51,17 +65,22 @@ const initialState = {
     eliminate: {
       id: "eliminate",
       title: "These tasks should be eliminated",
-      taskIds: ["task-7", "task-8"],
+      taskIds: ["task-7", "task-8", "task-9", "task-10"],
     },
   },
 };
 
 const gridReducer = (state = initialState, action) => {
-  let newState = { ...state };
+  let newState = JSON.parse(JSON.stringify(state));
+
   switch (action.type) {
     case MOVE_WITHIN_COLUMN:
+      newState.columns[action.columnId].taskIds = action.newTaskId;
       break;
     case MOVE_ACROSS_COLUMN:
+      newState.columns[action.sourceColumnId].taskIds = action.sourceColumTask;
+      newState.columns[action.destinationColumnId].taskIds =
+        action.destinationColumnTask;
       break;
   }
   return newState;
