@@ -1,25 +1,33 @@
 import React from "react";
 import { Heading, Box, Tooltip } from "@chakra-ui/react";
 import Task from "./Task";
+import { Droppable } from "react-beautiful-dnd";
 
 function DroppableContainer({ column }) {
-  console.log(column);
+  // console.log(column);
   return (
-    <Box>
-      <Tooltip label={column.title} placement={"top"}>
-        <Heading
-          _hover={{
-            cursor: "pointer",
-          }}
-        >
-          {column.id.toUpperCase()}
-        </Heading>
-      </Tooltip>
+    <Droppable droppableId={column.id}>
+      {(provided, snapshot) => {
+        return (
+          <Box ref={provided.innerRef} {...provided.droppableProps}>
+            <Tooltip label={column.title} placement={"top"}>
+              <Heading
+                _hover={{
+                  cursor: "pointer",
+                }}
+              >
+                {column.id.toUpperCase()}
+              </Heading>
+            </Tooltip>
 
-      {column.taskIds.map((taskId) => (
-        <Task taskId={taskId} key={taskId} />
-      ))}
-    </Box>
+            {column.taskIds.map((taskId) => (
+              <Task taskId={taskId} key={taskId} />
+            ))}
+            {provided.placeholder}
+          </Box>
+        );
+      }}
+    </Droppable>
   );
 }
 
