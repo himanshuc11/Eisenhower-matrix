@@ -1,7 +1,12 @@
 import React from "react";
-import { Grid, GridItem, Flex, Box } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import DroppableContainer from "./DroppableContainer";
 
 function Matrix() {
+  const gridData = useSelector((state) => state.grid);
+  // console.log(gridData.columns);
+
   return (
     <Flex
       background={"red"}
@@ -16,7 +21,9 @@ function Matrix() {
     >
       <Flex width={"100%"} height={"40%"} textAlign={"center"} padding={"1rem"}>
         <Box background={"rebeccapurple"} width={"100%"} marginRight={"1rem"}>
-          Area 1
+          <DroppableContainer
+            column={gridData.columns.urgent}
+          ></DroppableContainer>
         </Box>
         <Box
           width={"0.25rem"}
@@ -24,7 +31,9 @@ function Matrix() {
           background={"black"}
         ></Box>
         <Box background={"rebeccapurple"} width={"100%"} marginLeft={"1rem"}>
-          Area 2
+          <DroppableContainer
+            column={gridData.columns.schedule}
+          ></DroppableContainer>
         </Box>
       </Flex>
 
@@ -36,11 +45,15 @@ function Matrix() {
 
       <Flex width={"100%"} height={"40%"} textAlign={"center"} padding={"1rem"}>
         <Box background={"rebeccapurple"} width={"100%"} marginRight={"1rem"}>
-          Area 3
+          <DroppableContainer
+            column={gridData.columns.delegate}
+          ></DroppableContainer>
         </Box>
         <Box width={"0.25rem"} height="100%" background={"black"}></Box>
         <Box background={"rebeccapurple"} width={"100%"} marginLeft={"1rem"}>
-          Area 4
+          <DroppableContainer
+            column={gridData.columns.eliminate}
+          ></DroppableContainer>
         </Box>
       </Flex>
     </Flex>

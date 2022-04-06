@@ -1,3 +1,19 @@
+const MOVE_WITHIN_COLUMN = "move_within_column";
+const MOVE_ACROSS_COLUMN = "move_across_column";
+const DELETE_TASK = "delete_task";
+
+export const moveWithinColumn = () => {
+  return { type: MOVE_WITHIN_COLUMN };
+};
+
+export const moveAcrossColumn = () => {
+  return { type: MOVE_ACROSS_COLUMN };
+};
+
+export const deleteTask = () => {
+  return { type: DELETE_TASK };
+};
+
 const initialState = {
   tasks: {
     "task-1": { id: "task-1", content: "Urgent 1" },
@@ -39,3 +55,16 @@ const initialState = {
     },
   },
 };
+
+const gridReducer = (state = initialState, action) => {
+  let newState = { ...state };
+  switch (action.type) {
+    case MOVE_WITHIN_COLUMN:
+      break;
+    case MOVE_ACROSS_COLUMN:
+      break;
+  }
+  return newState;
+};
+
+export default gridReducer;
