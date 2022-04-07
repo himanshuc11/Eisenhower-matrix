@@ -69,8 +69,8 @@ export const moveAcrossColumn = (
   };
 };
 
-export const deleteTask = () => {
-  return { type: DELETE_TASK };
+export const deleteTask = (taskId) => {
+  return { type: DELETE_TASK, taskId };
 };
 
 export const addTask = (id, content, columnId) => {
@@ -95,7 +95,11 @@ const gridReducer = (state = persistedData, action) => {
       newState.columns[action.columnId].taskIds.push(action.id);
       break;
     case DELETE_TASK:
-      console.log("Delete Task");
+      delete newState.tasks[action.taskId];
+      for (let columnKey in newState.columns) {
+        let column = newState.columns[columnKey];
+        column.taskIds = column.taskIds.filter((t) => t !== action.taskId);
+      }
       break;
   }
   return newState;

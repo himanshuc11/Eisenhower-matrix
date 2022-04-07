@@ -1,10 +1,19 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { Box, Flex } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
+
+import { DeleteIcon } from "@chakra-ui/icons";
+import { deleteTask } from "./redux/ducks/grid";
 
 function Task({ taskId, index }) {
   const taskData = useSelector((state) => state.grid.tasks[taskId]);
+  const dispatch = useDispatch();
+
+  const handleDelete = (e) => {
+    dispatch(deleteTask(taskId));
+  };
+
   return (
     <Draggable draggableId={taskData.id} index={index}>
       {(provided, snapshot) => {
@@ -16,7 +25,10 @@ function Task({ taskId, index }) {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            {taskData.content}
+            <Flex justifyContent={"space-between"}>
+              <Box>{taskData.content}</Box>
+              <DeleteIcon w={5} h={5} onClick={handleDelete} />
+            </Flex>
           </Box>
         );
       }}
