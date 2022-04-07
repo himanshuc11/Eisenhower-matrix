@@ -1,9 +1,10 @@
 const MOVE_WITHIN_COLUMN = "move_within_column";
 const MOVE_ACROSS_COLUMN = "move_across_column";
 const DELETE_TASK = "delete_task";
+const ADD_TASK = "add_task";
 
-export const moveWithinColumn = (columnId, newTaskId) => {
-  return { type: MOVE_WITHIN_COLUMN, columnId: columnId, newTaskId: newTaskId };
+export const moveWithinColumn = (columnId, task) => {
+  return { type: MOVE_WITHIN_COLUMN, columnId: columnId, task };
 };
 
 export const moveAcrossColumn = (
@@ -23,6 +24,10 @@ export const moveAcrossColumn = (
 
 export const deleteTask = () => {
   return { type: DELETE_TASK };
+};
+
+export const addTask = (id, content, columnId) => {
+  return { type: ADD_TASK, id, content, columnId };
 };
 
 const initialState = {
@@ -75,12 +80,22 @@ const gridReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case MOVE_WITHIN_COLUMN:
-      newState.columns[action.columnId].taskIds = action.newTaskId;
+      newState.columns[action.columnId].taskIds = action.task;
       break;
     case MOVE_ACROSS_COLUMN:
       newState.columns[action.sourceColumnId].taskIds = action.sourceColumTask;
       newState.columns[action.destinationColumnId].taskIds =
         action.destinationColumnTask;
+      break;
+    case ADD_TASK:
+      // console.log("Adding Task");
+      newState.tasks[action.id] = { id: action.id, content: action.content };
+      // console.log(action);
+      newState.columns[action.columnId].taskIds.push(action.id);
+      // console.log(action);
+      break;
+    case DELETE_TASK:
+      console.log("Delete Task");
       break;
   }
   return newState;

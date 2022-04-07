@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { ChakraProvider, grid } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import { Button, Box } from "@chakra-ui/react";
 
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { moveWithinColumn, moveAcrossColumn } from "./redux/ducks/grid";
 
 import Matrix from "./Matrix";
+import AddTask from "./AddTask";
 
 function App() {
   const gridData = useSelector((state) => state.grid);
@@ -103,7 +104,9 @@ function App() {
     <ChakraProvider>
       <DragDropContext onDragEnd={handleDragEnd}>
         <Box height={"100%"} width={"100%"}>
-          <Matrix></Matrix>
+          <Matrix>
+            <AddTask></AddTask>
+          </Matrix>
         </Box>
       </DragDropContext>
     </ChakraProvider>

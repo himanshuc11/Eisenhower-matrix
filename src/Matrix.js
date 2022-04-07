@@ -3,7 +3,7 @@ import { Flex, Box } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import DroppableContainer from "./DroppableContainer";
 
-function Matrix() {
+function Matrix({ children }) {
   const gridData = useSelector((state) => state.grid);
   // console.log(gridData.columns);
 
@@ -19,6 +19,7 @@ function Matrix() {
       flexDirection={"column"}
       padding={"1rem"}
     >
+      {children}
       <Flex width={"100%"} height={"40%"} textAlign={"center"} padding={"1rem"}>
         <Box background={"rebeccapurple"} width={"100%"} marginRight={"1rem"}>
           <DroppableContainer
