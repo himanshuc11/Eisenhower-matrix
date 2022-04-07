@@ -2,44 +2,36 @@ const MOVE_WITHIN_COLUMN = "move_within_column";
 const MOVE_ACROSS_COLUMN = "move_across_column";
 const DELETE_TASK = "delete_task";
 const ADD_TASK = "add_task";
-
-// TODO: After implementing UI
 const EDIT_TASK = "edit_task";
 
 const persistedData = (function readPersistedData() {
   if (!localStorage.getItem("matrix")) {
     localStorage.setItem("matrix-key", 0);
     const initialState = {
-      tasks: {
-        // "task-1": { id: "task-1", content: "Urgent 1" },
-      },
+      tasks: {},
 
       columns: {
         urgent: {
           id: "urgent",
           title: "Do these tasks now",
-          // taskIds: ["task-1", "task-2"],
           taskIds: [],
         },
 
         schedule: {
           id: "schedule",
           title: "Schedule task for later",
-          // taskIds: ["task-3", "task-4"],
           taskIds: [],
         },
 
         delegate: {
           id: "delegate",
           title: "Delegate to someone else",
-          // taskIds: ["task-5", "task-6"],
           taskIds: [],
         },
 
         eliminate: {
           id: "eliminate",
           title: "These tasks should be eliminated",
-          // taskIds: ["task-7", "task-8", "task-9", "task-10"],
           taskIds: [],
         },
       },
@@ -49,7 +41,6 @@ const persistedData = (function readPersistedData() {
 
   let data = localStorage.getItem("matrix");
   data = JSON.parse(data);
-  console.log(data);
   return data;
 })();
 

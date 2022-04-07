@@ -5,7 +5,6 @@ import DroppableContainer from "./DroppableContainer";
 
 function Matrix({ children }) {
   const gridData = useSelector((state) => state.grid);
-  // console.log(gridData.columns);
 
   return (
     <Flex

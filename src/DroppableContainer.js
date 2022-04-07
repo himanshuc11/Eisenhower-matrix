@@ -4,7 +4,6 @@ import TaskContainer from "./TaskContainer";
 import { Droppable } from "react-beautiful-dnd";
 
 function DroppableContainer({ column }) {
-  // console.log(column);
   return (
     <Flex flexDirection={"column"} flexGrow="1" height={"100%"}>
       <Tooltip label={column.title} placement={"top"}>
