@@ -27,6 +27,7 @@ function TaskContainer({ taskId, index }) {
       {(provided, snapshot) => {
         return (
           <Box
+            zIndex={0}
             backgroundColor={"yellow.300"}
             margin={"0.5rem"}
             padding={"0.25rem"}

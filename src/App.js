@@ -1,5 +1,3 @@
-import "./App.css";
-
 import { ChakraProvider } from "@chakra-ui/react";
 
 import { Button, Box } from "@chakra-ui/react";

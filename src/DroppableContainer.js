@@ -6,38 +6,38 @@ import { Droppable } from "react-beautiful-dnd";
 function DroppableContainer({ column }) {
   // console.log(column);
   return (
-    <Droppable droppableId={column.id}>
-      {(provided, snapshot) => {
-        return (
-          <Box
-            height={"100%"}
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            {...provided.dragHandleProps}
-            overflow={"hidden"}
-            overflowY={"auto"}
-          >
-            <Flex flexDirection={"column"} flexGrow="1" height={"100%"}>
-              <Tooltip label={column.title} placement={"top"}>
-                <Heading
-                  _hover={{
-                    cursor: "pointer",
-                  }}
-                  position="relative"
-                  zIndex={"1"}
-                >
-                  {column.id.toUpperCase()} {`(${column.taskIds.length})`}
-                </Heading>
-              </Tooltip>
+    <Flex flexDirection={"column"} flexGrow="1" height={"100%"}>
+      <Tooltip label={column.title} placement={"top"}>
+        <Heading
+          _hover={{
+            cursor: "pointer",
+          }}
+          position="relative"
+          zIndex={10}
+        >
+          {column.id.toUpperCase()} {`(${column.taskIds.length})`}
+        </Heading>
+      </Tooltip>
+      <Droppable droppableId={column.id}>
+        {(provided, snapshot) => {
+          return (
+            <Box
+              height={"100%"}
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              {...provided.dragHandleProps}
+              overflow={"hidden"}
+              overflowY={"auto"}
+            >
               {column.taskIds.map((taskId, index) => (
                 <TaskContainer taskId={taskId} key={taskId} index={index} />
               ))}
               {provided.placeholder}
-            </Flex>
-          </Box>
-        );
-      }}
-    </Droppable>
+            </Box>
+          );
+        }}
+      </Droppable>
+    </Flex>
   );
 }
 
