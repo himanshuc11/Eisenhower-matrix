@@ -1,6 +1,6 @@
 import React from "react";
 import { Heading, Box, Tooltip, Flex } from "@chakra-ui/react";
-import Task from "./Task";
+import TaskContainer from "./TaskContainer";
 import { Droppable } from "react-beautiful-dnd";
 
 function DroppableContainer({ column }) {
@@ -14,6 +14,8 @@ function DroppableContainer({ column }) {
             ref={provided.innerRef}
             {...provided.droppableProps}
             {...provided.dragHandleProps}
+            overflow={"hidden"}
+            overflowY={"auto"}
           >
             <Flex flexDirection={"column"} flexGrow="1" height={"100%"}>
               <Tooltip label={column.title} placement={"top"}>
@@ -28,7 +30,7 @@ function DroppableContainer({ column }) {
                 </Heading>
               </Tooltip>
               {column.taskIds.map((taskId, index) => (
-                <Task taskId={taskId} key={taskId} index={index} />
+                <TaskContainer taskId={taskId} key={taskId} index={index} />
               ))}
               {provided.placeholder}
             </Flex>

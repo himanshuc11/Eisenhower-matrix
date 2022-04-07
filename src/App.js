@@ -103,7 +103,7 @@ function App() {
   return (
     <ChakraProvider>
       <DragDropContext onDragEnd={handleDragEnd}>
-        <Box height={"100%"} width={"100%"}>
+        <Box height={"100%"} width={"100%"} background={"blackAlpha.700"}>
           <Matrix>
             <AddTask></AddTask>
           </Matrix>

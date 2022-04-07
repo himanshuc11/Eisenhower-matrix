@@ -3,6 +3,9 @@ const MOVE_ACROSS_COLUMN = "move_across_column";
 const DELETE_TASK = "delete_task";
 const ADD_TASK = "add_task";
 
+// TODO: After implementing UI
+const EDIT_TASK = "edit_task";
+
 const persistedData = (function readPersistedData() {
   if (!localStorage.getItem("matrix")) {
     localStorage.setItem("matrix-key", 0);
@@ -77,6 +80,10 @@ export const addTask = (id, content, columnId) => {
   return { type: ADD_TASK, id, content, columnId };
 };
 
+export const editTask = (id, content) => {
+  return { type: EDIT_TASK, id, content };
+};
+
 const gridReducer = (state = persistedData, action) => {
   if (!state) return;
   let newState = JSON.parse(JSON.stringify(state));
@@ -100,6 +107,9 @@ const gridReducer = (state = persistedData, action) => {
         let column = newState.columns[columnKey];
         column.taskIds = column.taskIds.filter((t) => t !== action.taskId);
       }
+      break;
+    case EDIT_TASK:
+      newState.tasks[action.id].content = action.content;
       break;
   }
   return newState;

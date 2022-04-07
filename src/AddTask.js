@@ -1,5 +1,12 @@
 import React from "react";
-import { Input, Flex, Select, Button } from "@chakra-ui/react";
+import {
+  Input,
+  Flex,
+  Select,
+  Button,
+  background,
+  color,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useToast } from "@chakra-ui/react";
@@ -45,19 +52,48 @@ function AddTask() {
   };
 
   return (
-    <Flex width={"calc(100% - 2rem)"}>
+    <Flex width={"calc(100% - 2rem)"} justifyContent={"space-between"}>
       <Input
         placeholder="Write your task"
         value={taskData}
         onChange={handleTaskChange}
+        maxWidth={"33%"}
       ></Input>
-      <Select value={selectData} onChange={handleSelectChange}>
-        <option value="urgent">URGENT</option>
-        <option value="schedule">SCHEDULE</option>
-        <option value="delegate">DELEGATE</option>
-        <option value="eliminate">ELIMINATE</option>
+      <Select value={selectData} onChange={handleSelectChange} maxWidth={"33%"}>
+        <option
+          value="urgent"
+          style={{ color: "black", background: "#CBD5E0" }}
+        >
+          URGENT
+        </option>
+        <option
+          value="schedule"
+          style={{ color: "black", background: "#CBD5E0" }}
+        >
+          SCHEDULE
+        </option>
+        <option
+          value="delegate"
+          style={{ color: "black", background: "#CBD5E0" }}
+        >
+          DELEGATE
+        </option>
+        <option
+          value="eliminate"
+          style={{ color: "black", background: "#CBD5E0" }}
+        >
+          ELIMINATE
+        </option>
       </Select>
-      <Button onClick={handleSubmit}>Submit Task</Button>
+      <Button
+        onClick={handleSubmit}
+        maxWidth={"33%"}
+        background="blackAlpha.500"
+        color={"whiteAlpha.700"}
+        _hover={{ color: "blackAlpha.500", background: "whiteAlpha.700" }}
+      >
+        Submit Task
+      </Button>
     </Flex>
   );
 }
