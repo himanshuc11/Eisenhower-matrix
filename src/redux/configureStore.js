@@ -3,7 +3,6 @@ import counterReducer from "./ducks/counter";
 import gridReducer from "./ducks/grid";
 
 const reducer = combineReducers({
-  counter: counterReducer,
   grid: gridReducer,
 });
 

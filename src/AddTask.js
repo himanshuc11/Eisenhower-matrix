@@ -36,9 +36,12 @@ function AddTask() {
       return;
     }
 
+    const matrixKey = parseInt(localStorage.getItem("matrix-key"));
+    localStorage.setItem("matrix-key", matrixKey + 1);
+
     setTaskData("");
     setSelectData("urgent");
-    dispatch(addTask(taskId, content, columnId));
+    dispatch(addTask(`task-${matrixKey}`, content, columnId));
   };
 
   return (
